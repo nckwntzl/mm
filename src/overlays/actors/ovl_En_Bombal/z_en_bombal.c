@@ -46,7 +46,6 @@ extern ColliderCylinderInit D_80C06460;
 
 extern UNK_TYPE D_06000A00;
 
-
 void EnBombal_Init(Actor *thisx, GlobalContext *globalCtx) {
     EnBombal *this = THIS;
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 25.0f);
@@ -55,14 +54,19 @@ void EnBombal_Init(Actor *thisx, GlobalContext *globalCtx) {
     this->actor.targetMode = 6;
     this->actor.colChkInfo.health = 1;
     this->unk_150 = 0.1f;
-    this->cutscene = (s16) this->actor.cutscene;
+    this->unk_14C = (s16) this->actor.cutscene;
     func_80C05B24(this);
 }
 
+void EnBombal_Destroy(Actor *thisx, GlobalContext *globalCtx) {
+    EnBombal *this = THIS;
+    Collider_DestroyCylinder(globalCtx, (ColliderCylinder *) &this->unk154[4]);
+}
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bombal/EnBombal_Destroy.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bombal/func_80C05B24.s")
+void func_80C05B24(EnBombal *this) {
+    this->unk_14A = 0;
+    this->actionFunc = func_80C05B3C;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bombal/func_80C05B3C.s")
 
@@ -79,3 +83,5 @@ void EnBombal_Init(Actor *thisx, GlobalContext *globalCtx) {
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bombal/func_80C060B8.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bombal/func_80C06208.s")
+
+
