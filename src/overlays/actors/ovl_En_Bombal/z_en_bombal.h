@@ -11,7 +11,7 @@ typedef struct EnBombal {
     /* 0x0000 */ Actor actor;
     /* 0x0144 */ EnBombalActionFunc actionFunc;
     /* 0x0148 */ char unk148[0x4];
-    /* 0x014C */ s16 unk_14C;
+    /* 0x014C */ s16 cutscene;
     /* 0x0150 */ f32 unk_150;
     /* 0x0154 */ char unk154[0x150];
     /* 0x02A4 */ Vec3f unk_2A4;

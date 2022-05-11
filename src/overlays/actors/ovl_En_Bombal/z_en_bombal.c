@@ -18,6 +18,7 @@ void EnBombal_Draw(Actor* thisx, GlobalContext* globalCtx);
 void func_80C05B3C(EnBombal* this, GlobalContext* globalCtx);
 void func_80C05C44(EnBombal* this, GlobalContext* globalCtx);
 void func_80C05DE8(EnBombal* this, GlobalContext* globalCtx);
+void func_80C05B24(EnBombal * this);
 
 #if 0
 const ActorInit En_Bombal_InitVars = {
@@ -45,7 +46,19 @@ extern ColliderCylinderInit D_80C06460;
 
 extern UNK_TYPE D_06000A00;
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bombal/EnBombal_Init.s")
+
+void EnBombal_Init(Actor *thisx, GlobalContext *globalCtx) {
+    EnBombal *this = THIS;
+    ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 25.0f);
+    this->actor.colChkInfo.mass = 0;
+    Collider_InitAndSetCylinder(globalCtx, (ColliderCylinder *) &this->unk154[4], &this->actor, &D_80C06460);
+    this->actor.targetMode = 6;
+    this->actor.colChkInfo.health = 1;
+    this->unk_150 = 0.1f;
+    this->cutscene = (s16) this->actor.cutscene;
+    func_80C05B24(this);
+}
+
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/ovl_En_Bombal/EnBombal_Destroy.s")
 
